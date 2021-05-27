@@ -33,4 +33,11 @@ public class Room extends Fixture{
    // {
 
    // }
+   
+   public void describeRoom()
+   {
+	   System.out.println("||\t" + name + "\t||\n");
+	   System.out.println(shortDescription + "\n");
+	   System.out.println(longDescription + "\n");
+   }
 }
