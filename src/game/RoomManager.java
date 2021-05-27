@@ -16,6 +16,7 @@ public class RoomManager {
 	}
    
 
+	// creates rooms and items at the start of the program
    public void init()
    {
 	   Item knife = new Item("knife", "This knife can be used to cut rope.");
@@ -41,6 +42,26 @@ public class RoomManager {
 			              knife, 
 			              null);
 	   	rooms[1][1] = room2;	
+	   	
+	   	Room room3 = new Room(
+		              "The second room", 
+		              "a small foyer", 
+		              "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
+		                 + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
+		                 + "To the north is a small room, where you can see a piano.", 
+		              null, 
+		              null);
+	   	rooms[1][3] = room3;
+	   	
+	   	Room room4 = new Room(
+		              "The second room", 
+		              "a small foyer", 
+		              "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
+		                 + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
+		                 + "To the north is a small room, where you can see a piano.", 
+		              null, 
+		              null);
+	   	rooms[2][3] = room4;
    }
    
    

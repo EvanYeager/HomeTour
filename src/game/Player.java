@@ -13,18 +13,7 @@ public class Player {
    public Player(int[] startingCoordinates)
    {
 	   this.posX = startingCoordinates[0];
-	   this.posY = startingCoordinates[1];
-	   
-	   
-	   
-	   
-	   
-	   // ---- for testing
-//	   Item newItem = new Item("knife", "This knife can be used for defending yourself and cutting strings or wires.");
-//	   inventory.add(newItem);
-	   
-	   
-	   
+	   this.posY = startingCoordinates[1];   
 	   
    }
    
@@ -38,64 +27,41 @@ public class Player {
 		this.roomManager = roomManager;
 	}
 
-   // decided if it is possible to move in the specified direction, and if it is, moves the player and returns true
+   // decide if it is possible to move in the specified direction, and if it is, moves the player and returns true
    public boolean moveRooms(String direction)
    {
-	   boolean moved = false;
+	   int newPosX = posX;
+	   int newPosY = posY;
+	   
 	   switch (direction)
 	   {
 	   case "north":
-		   if (!roomManager.doesRoomExist(new int[] {posX, posY - 1})) // if cannot move in that direction, print to user and return from method
-		   {
-			   	cannotMove();
-			   	break;
-		   }
-		   moved = true;
-		   walk(new int[] {posX, posY - 1});
+		   newPosY--;
 		   break;
 	   case "east":
-		   if (!roomManager.doesRoomExist(new int[] {posX + 1, posY}))
-		   {
-			   	cannotMove();
-			   	break;
-		   }
-		   moved = true;
-		   walk(new int[] {posX + 1, posY});
+		   newPosX++;
 		   break;
 	   case "south":
-		   if (!roomManager.doesRoomExist(new int[] {posX, posY + 1}))
-		   {
-			   	cannotMove();
-		   		break;
-		   }
-		   moved = true;
-		   walk(new int[] {posX, posY + 1});
+		   newPosY++;
 		   break;
 	   case "west":
-		   if (!roomManager.doesRoomExist(new int[] {posX - 1, posY}))
-		   {
-			   	cannotMove();
-			   	break;
-		   }
-		   moved = true;
-		   walk(new int[] {posX - 1, posY});
+		   newPosX--;
 		   break;
 	   default:
 		   System.out.println("Invalid direction entered.");
-		   return moved;
+		   return false;
 	   }
 	   
-	   if (moved)
+	   if(!roomManager.doesRoomExist(new int[] {newPosX, newPosY}))
 	   {
-		   System.out.println("You walk into the room in the " + direction + ".");		   
+		   System.out.println("\n\nYou cannot move in that direction.\n");
+		   return false;
 	   }
-	   return moved; // by default, flow breaks out of switch statement and returns false, but if the player can move in the specified direction, the player moves and this function returns true
 	   
-   }
-   
-   private void cannotMove()
-   {
-	   System.out.println("\n\nYou cannot move in that direction.\n");
+	   walk(new int[] {newPosX, newPosY});
+	   
+	   System.out.println("You walk into the room in the " + direction + ".");
+	   return true;
    }
    
    private void walk(int[] targetCoordinates)

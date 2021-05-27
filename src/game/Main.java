@@ -2,8 +2,6 @@ package game;
 
 import java.util.Scanner;
 
-import fixtures.Item;
-
 public class Main {
 	static final int[] startingCoordinates = {0, 1};
 	static final String[][] commands = {
