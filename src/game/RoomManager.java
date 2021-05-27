@@ -12,6 +12,7 @@ public class RoomManager {
 	public RoomManager(Player player)
 	{
 		this.player = player;
+		player.setRoomManager(this);
 	}
    
 

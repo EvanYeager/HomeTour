@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 	static final int[] startingCoordinates = {0, 1};
 	
-	static Player player = new Player(startingCoordinates, );
+	static Player player = new Player(startingCoordinates);
 	static RoomManager roomManager = new RoomManager(player);
 	static Scanner scan = new Scanner(System.in);
 	

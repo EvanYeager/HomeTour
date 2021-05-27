@@ -1,19 +1,27 @@
 package game;
 
-import fixtures.Room;
-
 public class Player {
    public int posX = 0;
    public int posY = 0;
-   public Main main;
+   private RoomManager roomManager;
    
 
-   public Player(int[] startingCoordinates, Main main)
+   public Player(int[] startingCoordinates)
    {
-      this.posX = startingCoordinates[0];
-      this.posY = startingCoordinates[1];
-      this.main = main;
+	   this.posX = startingCoordinates[0];
+	   this.posY = startingCoordinates[1];
    }
+   
+   public RoomManager getRoomManager() 
+   {
+	return roomManager;
+   }
+
+	public void setRoomManager(RoomManager roomManager) 
+	{
+		this.roomManager = roomManager;
+	}
+
    
    public void moveRooms(String direction)
    {
@@ -21,7 +29,7 @@ public class Player {
 	   switch (direction)
 	   {
 	   case "north":
-		   if (!main.roomManager.doesRoomExist(new int[] {posX, posY - 1})) // if cannot move in that direction, print to user and return from method
+		   if (!roomManager.doesRoomExist(new int[] {posX, posY - 1})) // if cannot move in that direction, print to user and return from method
 		   {
 			   	cannotMove();
 		   		return;
@@ -29,7 +37,7 @@ public class Player {
 		   posY--;
 		   break;
 	   case "east":
-		   if (!main.roomManager.doesRoomExist(new int[] {posX + 1, posY}))
+		   if (!roomManager.doesRoomExist(new int[] {posX + 1, posY}))
 		   {
 			   	cannotMove();
 		   		return;
@@ -37,7 +45,7 @@ public class Player {
 		   posX++;
 		   break;
 	   case "south":
-		   if (!main.roomManager.doesRoomExist(new int[] {posX, posY + 1}))
+		   if (!roomManager.doesRoomExist(new int[] {posX, posY + 1}))
 		   {
 			   	cannotMove();
 		   		return;
@@ -45,7 +53,7 @@ public class Player {
 		   posY++;
 		   break;
 	   case "west":
-		   if (!main.roomManager.doesRoomExist(new int[] {posX - 1, posY}))
+		   if (!roomManager.doesRoomExist(new int[] {posX - 1, posY}))
 		   {
 			   	cannotMove();
 		   		return;
@@ -62,7 +70,7 @@ public class Player {
    
    private void cannotMove()
    {
-	   System.out.println("You cannot move that direction.");
+	   System.out.println("\n\nYou cannot move that direction.\n");
    }
    
    
