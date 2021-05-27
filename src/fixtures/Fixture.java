@@ -1,14 +1,14 @@
 package fixtures;
 
 public abstract class Fixture {
-   String name;
-   String shortDescription;
-   String longDescription;
+   public String name;
+   public String shortDescription;
 
-   public Fixture(String name, String shortDescription, String longDescription)
+   public Fixture(String name, String shortDescription)
    {
       this.name = name;
       this.shortDescription = shortDescription;
-      this.longDescription = longDescription;
    }
+   
+   public abstract void describe();
 }

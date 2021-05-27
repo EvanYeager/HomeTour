@@ -2,6 +2,8 @@ package game;
 
 import java.util.Scanner;
 
+import fixtures.Item;
+
 public class Main {
 	static final int[] startingCoordinates = {0, 1};
 	static final String[][] commands = {
@@ -9,7 +11,7 @@ public class Main {
 			{"inventory", "Show all items in the player's inventory."},
 			{"help", "Show all commands and their effect."},
 			{"take", "Takes the item in the current room, if one exists."},
-			{"place", "item name", "Places"}};
+			{"place", "{item name}", "If the specified item is in player's inventory, places that item in the current room."}};
 	
 	static Player player = new Player(startingCoordinates);
 	static RoomManager roomManager = new RoomManager(player);
@@ -17,17 +19,15 @@ public class Main {
 	
 	private static boolean wasActionPerformed = true;
 	
-   public static void main(String[] args) 
+   public static void main(String[] args) throws InterruptedException 
    {
 	   printWelcomeText();
 	   roomManager.init();
+	   Thread.sleep(500);
 	   
 	   while(true)
 	   {
-		   if (wasActionPerformed)
-		   {
-			   printCurrentRoom();			   
-		   }
+		   if (wasActionPerformed) printCurrentRoom();
 		   
 		   parse(collectInput());
 		   
@@ -36,17 +36,17 @@ public class Main {
    
    private static void printWelcomeText()
    {
-	   System.out.println("placeholder");
+	   System.out.println("placeholder welcome text");
    }
 
    private static void printCurrentRoom()
    {
-	   roomManager.rooms[player.posX][player.posY].describeRoom();
+	   roomManager.rooms[player.posX][player.posY].describe();
    }
 
    private static String[] collectInput() 
    {
-	   System.out.println("Enter an action");
+	   System.out.println("Enter an action:");
 	   String input = scan.nextLine().toLowerCase();
 	   return input.split(" ", 2); // Separate the input into two commands, the action and the modifier. If there are more than two words they are ignored.
    }
@@ -55,13 +55,42 @@ public class Main {
    {
 	   switch (command[0])
 	   {
+	   default:
+		   System.out.println("Invalid command entered. Please try again or type 'help' to see a list of commands.");
+		   wasActionPerformed = false;
+		   break;
 	   case "go":
 		   wasActionPerformed = player.moveRooms(command[1]);
 		   break;
 	   case "inventory":
 		   player.printInventory();
-		   wasActionPerformed = true;
+		   wasActionPerformed = false;
 		   break;
+	   case "place":
+		   player.placeItem(command[1]);
+		   wasActionPerformed = false;
+		   break;
+	   case "take":
+		   player.takeItem();
+		   wasActionPerformed = false;
+		   break;
+	   case "help":
+		   printHelpMenu();
+		   wasActionPerformed = false;
 	   }
+   }
+   
+   private static void printHelpMenu()
+   {
+	   System.out.println("\n");
+	   for (String[] command : commands)
+	   {
+		   for (String word : command)
+		   {
+			   System.out.print(word + "\t\t\t");
+		   }
+		   System.out.println("");
+	   }
+	   System.out.println("\n");
    }
 }

@@ -1,9 +1,9 @@
 package game;
 
 import fixtures.Room;
+import fixtures.Item;
 
 public class RoomManager {
-	// TODO make a predefined map
 	Room startingRoom;
 	Room[][] rooms = new Room[4][4];
 	Player player;
@@ -18,24 +18,45 @@ public class RoomManager {
 
    public void init()
    {
-      Room room1 = new Room(
+	   Item knife = new Item("knife", "This knife can be used to cut rope.");
+	   
+	   Room room1 = new Room(
                            "The Foyer", 
                            "A small foyer", 
                            "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
                               + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
-                              + "To the north is a small room, where you can see a piano.");
-      rooms[0][1] = room1;
-      startingRoom = room1;
+                              + "To the north is a small room, where you can see a piano.",
+                            null,
+                            knife);
+	   rooms[0][1] = room1;
+	   startingRoom = room1;
       
       
-      Room room2 = new Room(
+	   Room room2 = new Room(
 			              "The second room", 
 			              "a small foyer", 
 			              "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
 			                 + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
-			                 + "To the north is a small room, where you can see a piano.");
-	   rooms[1][1] = room2;	
+			                 + "To the north is a small room, where you can see a piano.", 
+			              knife, 
+			              null);
+	   	rooms[1][1] = room2;	
    }
+   
+   
+   /* If I had more time I could setup an option to create the map randomly each time the application runs
+//   private void setupExits()
+//   {
+//	   if (randomExits)
+//	   {
+//		   
+//	   }
+//	   else
+//	   {
+//		   
+//	   }
+//   }
+*/  
    
    public int[] getRoomCoordinates(Room room)
    {
