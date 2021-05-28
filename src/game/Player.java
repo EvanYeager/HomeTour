@@ -36,16 +36,16 @@ public class Player {
 	   switch (direction)
 	   {
 	   case "north":
-		   newPosY--;
+		   newPosX--;
 		   break;
 	   case "east":
-		   newPosX++;
-		   break;
-	   case "south":
 		   newPosY++;
 		   break;
+	   case "south":
+		   newPosX++;
+		   break;
 	   case "west":
-		   newPosX--;
+		   newPosY--;
 		   break;
 	   default:
 		   System.out.println("Invalid direction entered.");
@@ -141,6 +141,11 @@ public class Player {
 	   inventory.add(currentRoom.currentItem);
 	   System.out.println("You picked up the " + currentRoom.currentItem.name + ".");
 	   currentRoom.currentItem = null;
+   }
+   
+   public void createKey()
+   {
+	   inventory.add(roomManager.key);
    }
    
 }

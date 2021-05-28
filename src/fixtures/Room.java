@@ -44,8 +44,7 @@ public class Room extends Fixture{
 	   if (this.name.equals("Bedroom"))
 	   {
 		   System.out.println("You cut into the mattress with your knife. You open it up to reveal a key! You put it in your pocket.");
-		   Item key = new Item("key", "A key that unlocks a locked door.");
-		   player.inventory.add(key);
+		   player.createKey();
 	   }
 	   else if (this.name.equals("Exit Room"))
 	   {

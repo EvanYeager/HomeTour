@@ -3,7 +3,7 @@ package game;
 import java.util.Scanner;
 
 public class Main {
-	static final int[] startingCoordinates = {0, 1};
+	static final int[] startingCoordinates = {1, 0};
 	static final String[][] commands = {
 			{"go", "{direction}", "Go into the room in the specified direction, if such room exists."},
 			{"inventory", "Show all items in the player's inventory."},
@@ -25,16 +25,16 @@ public class Main {
 	   
 	   while(true)
 	   {
-		   if (wasActionPerformed) printCurrentRoom();
+		   if (wasActionPerformed) printCurrentRoom(); // if player moved last loop, print room description
 		   
-		   parse(collectInput());
+		   parse(collectInput()); // get command input from user
 		   
 	   }
    }
    
    private static void printWelcomeText()
    {
-	   System.out.println("placeholder welcome text");
+	   System.out.println("You wake up with a start. You are somewhere you don't recognize. \nWhere are you? You have a throbbing headache, as if someone hit you on the head with a bat. ");
    }
 
    private static void printCurrentRoom()

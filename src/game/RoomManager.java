@@ -7,6 +7,8 @@ public class RoomManager {
 	Room startingRoom;
 	Room[][] rooms = new Room[4][4];
 	Player player;
+	Item knife = new Item("knife", "This knife can be used to cut all kinds of things.");
+	Item key = new Item("key", "A key that unlocks a locked door.");
 	
 	
 	public RoomManager(Player player)
@@ -16,10 +18,9 @@ public class RoomManager {
 	}
    
 
-	// creates rooms and items at the start of the program
+	// creates rooms
    public void init()
    {
-	   Item knife = new Item("knife", "This knife can be used to cut all kinds of things.");
 	   
 	   Room room1 = new Room(
                            "Bedroom", 
@@ -28,7 +29,7 @@ public class RoomManager {
                               + "There is a door that's ajar to the east..." + "\n", 
                             null,
                             knife);
-	   rooms[0][1] = room1;
+	   rooms[1][0] = room1;
 	   startingRoom = room1;
       
       
@@ -42,24 +43,21 @@ public class RoomManager {
 	   	rooms[1][1] = room2;	
 	   	
 	   	Room room3 = new Room(
-		              "The second room", 
-		              "a small foyer", 
-		              "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
-		                 + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
-		                 + "To the north is a small room, where you can see a piano.", 
+		              "Third room", 
+		              "short description", 
+		              "long description\n" + 
+		              "There is a room to the east", 
 		              null, 
 		              null);
-	   	rooms[1][3] = room3;
+	   	rooms[2][1] = room3;
 	   	
 	   	Room room4 = new Room(
-		              "The second room", 
-		              "a small foyer", 
-		              "The small entryway of a neo-colonial house. A dining room is open to the south, where a large table can be seen." + "\n"
-		                 + "The hardwood floor leads west into doorway, next to a staircase that leads up to a second floor." + "\n"
-		                 + "To the north is a small room, where you can see a piano.", 
+		              "Exit Room", 
+		              "The room at the end", 
+		              "This room has a locked door at the far end the leads to outside. A key should be able to open it.", 
 		              null, 
-		              null);
-	   	rooms[2][3] = room4;
+		              key);
+	   	rooms[2][2] = room4;
    }
    
    
@@ -76,19 +74,7 @@ public class RoomManager {
 //	   }
 //   }
 */  
-   
-   public int[] getRoomCoordinates(Room room)
-   {
-	   for (int row = 0; row < 5; row++)
-	   {
-		   for (int column = 0; column < 5; column++)
-		   {
-			   if (rooms[row][column] == room) return new int[] {row, column};
-		   }
-	   }
-	   return null;
-   }
-   
+
    // returns if a room exists in a given location
    public boolean doesRoomExist(int[] roomLocation)
    {
