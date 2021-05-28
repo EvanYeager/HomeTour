@@ -105,7 +105,7 @@ public class Player {
 	   Room currentRoom = roomManager.rooms[posX][posY];
 	   if (canPlaceItem(item, currentRoom))
 	   {
-		   currentRoom.takeItem(item);
+		   currentRoom.takeItem(item, this);
 		   inventory.remove(item);
 	   }
 	   else

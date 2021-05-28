@@ -1,5 +1,6 @@
 package fixtures;
 
+import game.Player;
 
 public class Room extends Fixture{
    String longDescription;
@@ -27,19 +28,35 @@ public class Room extends Fixture{
 	   }
    }
    
-   public void takeItem(Item item)
+   public void takeItem(Item item, Player player)
    {
 	   currentItem = item;
 	   System.out.println("-- You placed your " + item.name + " in the room. --\n");
 	   if (currentItem == correspondingItem)
 	   {
-		   cueRoomEffect();
+		   cueRoomEffect(player);
 	   }
    }
    
-   // If I had more time, I could make this function perform some action to advance the game
-   private void cueRoomEffect()
+   
+   private void cueRoomEffect(Player player)
    {
-	   System.out.println("This item has a special effect in this room!");
+	   if (this.name.equals("Bedroom"))
+	   {
+		   System.out.println("You cut into the mattress with your knife. You open it up to reveal a key! You put it in your pocket.");
+		   Item key = new Item("key", "A key that unlocks a locked door.");
+		   player.inventory.add(key);
+	   }
+	   else if (this.name.equals("Exit Room"))
+	   {
+		   System.out.println("You insert the key into the locked door. With a twist of the doorknob, the door swings open.");
+		   System.out.println("Congratulations! You made it out of the house! Exiting the game...");
+		   try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		   System.exit(0);
+	   }
    }
 }
